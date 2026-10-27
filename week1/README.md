@@ -21,18 +21,3 @@ Learning OpenStack Networking (James Denton, 1판)
 
 Site Reliability Engineering (sre.google 무료 공개)
 - 6장 Monitoring Distributed Systems 전체 (p.81–92)
-
-✏️ 발표 준비
-
-랜덤 추첨이라 전원 준비 부탁드립니다!
-
-⚠️ 세션 전 확인
-
-- 디스코드 접속, 마이크 확인
-- 세션 진행 간에 캠 켜주시면 감사하겠습니다!
-
-추가로 원활한 소통을 위해 카톡방 들어와주시면 감사하겠습니다!
-
-https://invite.kakao.com/tc/31Ai9O9hGS
-
-공지 확인 후 카톡방에 들어오시고 나서 ✅ 표시 눌러주세요!
