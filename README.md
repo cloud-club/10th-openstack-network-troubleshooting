@@ -50,19 +50,6 @@ week1/ … week8/
 
 ## Git으로 제출하기
 
-처음이면 아래를 순서대로 따라 하면 됩니다. Windows는 PowerShell, Mac/Linux는 터미널에서 실행합니다.
-
-### 최초 1회
-
-```bash
-git clone https://github.com/cloud-club/10th-openstack-network-troubleshooting.git
-cd 10th-openstack-network-troubleshooting
-git config user.name "본인이름"
-git config user.email "본인@이메일"
-```
-
-> 이 저장소는 운영진이 collaborator로 초대합니다. GitHub 초대 메일을 수락한 뒤 clone 하세요.
-
 ### 매주 제출 (예: 2회차, 홍길동)
 
 ```bash
