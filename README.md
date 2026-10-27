@@ -1,6 +1,6 @@
 # 10th-openstack-network-troubleshooting
 
-# CloudClub OpenStack 시즌2 — "ping은 되는데요?"
+## CloudClub OpenStack 시즌2 — "ping은 되는데요?"
 
 구축된 OpenStack(Neutron ML2/OVS) 클러스터에서 **매주 한 가지 네트워크 장애를 받아 원인이 어디인지 추적**하는 8주 스터디입니다.
 복구는 운영진이 세션에서 합니다. 평가는 **어떤 관찰로 어디까지 좁혀갔는지**입니다.
