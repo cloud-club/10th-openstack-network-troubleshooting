@@ -61,14 +61,12 @@ VM1 ─ tap ─ qbr ─ qvb/qvo ─ br-int ─ br-tun ─ (노드 간 경로) �
 
 | # | 가설 (어디가 문제일 것 같다) | 확인 방법 (명령) | 결과 | 판단 |
 | --- | --- | --- | --- | --- |
-| 1 | 포트 자체가 비정상 | `openstack port list --server cc03-vm2` 
-`openstack port show <port ID>` | VM1과 동일 | 기각 |
+| 1 | 포트 자체가 비정상 | `openstack port list --server cc03-vm2`<br>`openstack port show <port ID>` | VM1과 동일 | 기각 |
 | 2 | 보안 그룹 정책에서 SSH가 빠졌다 | `openstack security group rule list cc03-sg` | SSH, ICMP 모두 허용 | 기각 |
-| 3 | 애초에 노드 간 통신이 끊겼다 | `ping -> ip neigh`  | `REACHABLE`/`STALE` | 기각 |
+| 3 | 애초에 노드 간 통신이 끊겼다 | `ping` → `ip neigh` | `REACHABLE` / `STALE` | 기각 |
 | 4 | cmp02의 vm2 qvo까지 패킷이 도착하지 않는다 | `sudo timeout 15 tcpdump -ni qvo<port ID> icmp` | 도착함 | 기각 |
 | 5 | cmp02의 vm2 tap까지 패킷이 도착하지 않는다 | `sudo timeout 15 tcpdump -ni tap<port ID> icmp` | 도착하지 않음 | 유지 |
-| 6 | qvo ~ tap 사이에서 연결이 끊겼다 | `ip -br link show master qbr<port ID>` | qvb가 안 나옴
-→ **vm2의 qvb가 qbr 브리지에 붙어 있지 않다** | 유지 |
+| 6 | qvo ~ tap 사이에서 연결이 끊겼다 | `ip -br link show master qbr<port ID>` | qvb가 안 나옴<br>→ **vm2의 qvb가 qbr 브리지에 붙어 있지 않다** | 유지 |
 
 ## 4. 원인 · 복구 방안
 
