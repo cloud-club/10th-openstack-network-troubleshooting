@@ -13,7 +13,7 @@
 
 | 교재 | 범위 | 읽으면서 볼 것 |
 | --- | --- | --- |
-| Learning OpenStack Networking | **5장 PDF p.128–130** (Network management), **p.140–141** (Subnets), **p.153** (Ports), **p.154–162** (Attaching instances ~ metadata) | 포트의 IP는 **누가 언제** 정하는지. VM이 `169.254.169.254`로 가는 길은 **어디를 거치는지** — 책이 말하는 두 경로와 그 조건 |
+| Learning OpenStack Networking | **5장 PDF p.128–131** (Network management), **p.140–142** (Subnets), **p.153** (Ports), **p.154–162** (Attaching instances ~ metadata) | 포트의 IP는 **누가 언제** 정하는지. VM이 `169.254.169.254`로 가는 길은 **어디를 거치는지** — 책이 말하는 두 경로와 그 조건 |
 | 공식 문서 | [Neutron 2026.1: MTU considerations](https://docs.openstack.org/neutron/2026.1/admin/config-mtu.html) | 1450이 어떻게 계산되고 VM에 **어떤 방법으로** 전달되는지 |
 | SRE | **12장 PDF p.172–176** (Negative Results Are Magic ~ Making Troubleshooting Easier) · **6장 Black-Box vs White-Box** 재독 (3회차 범위) | 기각한 가설을 왜 기록해야 하는지. 블랙박스 프로브가 **못 보는 길**은 어디인지 |
 
