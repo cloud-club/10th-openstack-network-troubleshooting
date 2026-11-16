@@ -45,9 +45,9 @@ vm1(eth0) → tap → qbr → qvb ─ qvo → br-int → … → VXLAN → cmp02
 | 3 | 출력이 긴 명령이면 vm1에서 멈춘다 | vm1에서 `seq 1 50000` | **17967까지 출력되고 멈춤** | 유지 |
 | 4 | vm1 경로에서 큰 패킷만 막힌다 | net01에서 `for n in 1250 1300 1350 1400; do ping -c2 -W1 -M do -s $n 203.0.113.205; done`, 이어서 `for n in 1272 1273; do …; done` (IP 패킷 = N+28) | vm1 FIP: `-s 1250` 2/2 응답, `-s 1300`·`-s 1350`·`-s 1400` 0/2. 경계 정밀화: `-s 1272`(IP 1300) 2/2 응답, `-s 1273`(IP 1301) 0/2 (100% loss). vm2 FIP: `-s 1250`, `-s 1400` 모두 2/2 응답 | 유지 |
 | 5 | net01 qrouter(FIP 경로)의 인터페이스 mtu가 낮다 | `sudo ip netns exec qrouter-10322d7c-163e-4c09-a7db-a2acdab5f36b ip -o addr`, `… ip -o link` | FIP 203.0.113.205는 `qg-5801a520-01`(mtu 1500)에 있음. 내부측 `qr-bd669f9f-3f` mtu 1450 | 기각 |
-| 6 | 경로 장치 중 하나의 mtu가 다르다 | cmp01에서 `ip -o link | grep b88849a1-1c`, cmp02에서 `ip -o link | grep eb99e8d2-ed` | vm1(cmp01): `qbrb88849a1-1c`, `qvob88849a1-1c`, `qvbb88849a1-1c` mtu **1300**, `tapb88849a1-1c` mtu **1450**. vm2(cmp02): `qbreb99e8d2-ed`, `qvoeb99e8d2-ed`, `qvbeb99e8d2-ed`, `tapeb99e8d2-ed` 모두 mtu **1450** | 유지 |
+| 6 | 경로 장치 중 하나의 mtu가 다르다 | vm1: cmp01에서 `ip -o link` 출력 중 `b88849a1-1c`가 들어간 줄(grep). vm2: cmp02에서 `ip -o link` 출력 중 `eb99e8d2-ed`가 들어간 줄(grep) | vm1(cmp01): `qbrb88849a1-1c`, `qvob88849a1-1c`, `qvbb88849a1-1c` mtu 1300, `tapb88849a1-1c` mtu 1450. vm2(cmp02): `qbreb99e8d2-ed`, `qvoeb99e8d2-ed`, `qvbeb99e8d2-ed`, `tapeb99e8d2-ed` 모두 mtu 1450 | 유지 |
 | 7 | VM 안 값이나 DHCP가 준 값이 vm1만 다르다 | vm1에서 `ip link show eth0`, ops01에서 `openstack network show cc03-net -c mtu` | vm1 `eth0` mtu **1450**, 네트워크 mtu **1450** | 기각 |
-| 8 | cmp01에서 실제로 패킷이 버려지는 기록이 있다 | cmp01에서 `sudo dmesg | grep -i mtu | tail` | `qvob88849a1-1c: dropped over-mtu packet: 1450 > 1300`(2건), `1328 > 1300`(2건), `1378 > 1300`(2건), `1428 > 1300`(2건), `1301 > 1300`(2건) | 유지 |
+| 8 | cmp01에서 실제로 패킷이 버려지는 기록이 있다 | cmp01에서 `sudo dmesg` 출력 중 mtu가 들어간 줄의 마지막 부분(grep -i mtu, tail) | `qvob88849a1-1c: dropped over-mtu packet: 1450 > 1300` (2건), `1328 > 1300` (2건), `1378 > 1300` (2건), `1428 > 1300` (2건), `1301 > 1300` (2건) | 유지 |
 
 ## 4. 원인 · 복구 방안
 
